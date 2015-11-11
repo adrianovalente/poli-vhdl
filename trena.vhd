@@ -5,11 +5,10 @@ use ieee.std_logic_arith.all;
 entity trena is
   port(
     clk: in std_logic;
-    distance: out integer range 0 to 24000;
+    echo_time: out integer range 0 to 24000;
     trigger: out std_logic;
     echo: in std_logic;
-    alg0, alg1, alg2: out std_logic_vector(3 downto 0);
-    distance_in_meters: out integer range 0 to 512
+    alg0, alg1, alg2: out std_logic_vector(3 downto 0)
   );
 end trena;
 
@@ -43,10 +42,9 @@ begin
     time_in=>distancia,
     alg0=>alg0,
     alg1=>alg1,
-    alg2=>alg2,
-    meters=>distance_in_meters
+    alg2=>alg2
   );
   
-distance <= distancia;
+echo_time <= distancia;
 
 end structural;
