@@ -36,7 +36,7 @@ begin
     d=>counter,
     q=>distancia
   );
-  
+
   calc: entity work.calc(seila)
   port map(
     time_in=>distancia,
@@ -44,7 +44,7 @@ begin
     alg1=>alg1,
     alg2=>alg2
   );
-  
+
 echo_time <= distancia;
 
 end structural;
