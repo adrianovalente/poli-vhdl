@@ -24,7 +24,11 @@ begin
   process(clk)
   begin
     if clk'event and clk='1' then
-      main_counter <= main_counter + 1;
+      if main_counter = 9999999+1 then
+		main_counter <= 0;
+	  else
+        main_counter <= main_counter + 1;
+      end if;
     end if;
   end process;
 
@@ -43,22 +47,24 @@ begin
   -- next angulo
   process(clk, current_state)
   begin
-    if current_state=muda_angulo then
-      case angulo is
-        when 0 =>
-          angulo <= 30;
-        when 30 =>
-          angulo <= 60;
-        when 60 =>
-          angulo <= 90;
-        when 90 =>
-          angulo <= 120;
-        when 120 =>
-          angulo <= 150;
-        when others =>
-          angulo <= 0;
-      end case;
-    end if;
+	if clk'event and clk='1' then
+		if current_state=muda_angulo then
+		  case angulo is
+			when 0 =>
+			  angulo <= 30;
+			when 30 =>
+			  angulo <= 60;
+			when 60 =>
+			  angulo <= 90;
+			when 90 =>
+			  angulo <= 120;
+			when 120 =>
+			  angulo <= 150;
+			when others =>
+			  angulo <= 123;
+		  end case;
+		end if;
+	end if;
   end process;
 
   -- next state logic
@@ -69,11 +75,11 @@ begin
         when muda_angulo =>
           current_state <= delay;
         when delay =>
-          if main_counter=49999999 then
+          --if main_counter>9999999 then
             current_state <= dispara_trigger;
-          else
-            current_state <= delay;
-          end if;
+          --else
+           -- current_state <= delay;
+          --end if;
         when dispara_trigger =>
           if trigger_counter = 499 then
             current_state <= espera_1;

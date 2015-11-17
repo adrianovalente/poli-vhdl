@@ -20,7 +20,7 @@ begin
     port map(
       clk=>clk,
       rst=>'1',
-      pwm=>trigger
+      pwm=>open
     );
 
   triggerCounter: entity work.triggerCounter(bhv)
@@ -50,7 +50,7 @@ begin
     clk=>clk,
     echo=>echo,
     enable=>'1',
-    trigger=>open,
+    trigger=>trigger,
     enviar=>open,
     max_value=>open,
     angulo_out=>open
