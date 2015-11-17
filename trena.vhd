@@ -45,6 +45,17 @@ begin
     alg2=>alg2
   );
 
+  controller: entity work.controlUnit(arch)
+  port map(
+    clk=>clk,
+    echo=>echo,
+    enable=>'1',
+    trigger=>open,
+    enviar=>open,
+    max_value=>open,
+    angulo_out=>open
+  );
+
 echo_time <= distancia;
 
 end structural;
