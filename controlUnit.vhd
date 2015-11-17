@@ -61,7 +61,7 @@ begin
 			when 120 =>
 			  angulo <= 150;
 			when others =>
-			  angulo <= 123;
+			  angulo <= 0;
 		  end case;
 		end if;
 	end if;
