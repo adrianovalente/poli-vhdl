@@ -75,11 +75,11 @@ begin
         when muda_angulo =>
           current_state <= delay;
         when delay =>
-          --if main_counter>9999999 then
+          if main_counter>9999999 then
             current_state <= dispara_trigger;
-          --else
-           -- current_state <= delay;
-          --end if;
+          else
+            current_state <= delay;
+          end if;
         when dispara_trigger =>
           if trigger_counter = 499 then
             current_state <= espera_1;
