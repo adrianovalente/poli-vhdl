@@ -11,7 +11,7 @@ end pwmGenerator;
 
 architecture bhv of pwmGenerator is
   shared variable counter : integer range 0 to 1000000 := 0;
-  shared variable max_cycles_value : integer range 0 to 1000000 := 0;
+  shared variable max_cycles_value : integer range 0 to 120000 := 30000;
   shared variable state_counter : integer range 0 to 180 := 0;
   shared variable direction : integer range -1 to 1 := 1; 
   signal mudar: std_logic;
@@ -46,10 +46,10 @@ begin
   process(clk)
   begin
     if mudar'event and mudar='1' then
-	  max_cycles_value := 6500 * state_counter/10;
+	  max_cycles_value := 30000 + 500 * state_counter;
 	  if(state_counter = 180) then
 			direction := -1;
-	  elsif(state_counter = 3) then
+	  elsif(state_counter = 0) then
             direction := 1;
 	  end if;
 	  state_counter := state_counter + direction;
