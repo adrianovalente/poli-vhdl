@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity pwmGenerator is
   port (
-    clk, rst, entra: in std_logic;
+    clk, rst: in std_logic;
     pwm: out std_logic;
     ct: out integer range 0 to 1000000
   );
