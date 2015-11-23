@@ -142,11 +142,11 @@ begin
         uart_trigger <= '1';
 
       when prepara_virgula =>
-        alg_enviar <= "110";
+        alg_enviar <= "1101";
         uart_trigger <= '0';
 
       when envia_virgula =>
-        alg_enviar <= "110";
+        alg_enviar <= "1101";
         uart_trigger <= '1';
 
       when prepara_ang_2 =>
@@ -174,15 +174,15 @@ begin
         uart_trigger <= '1';
 
       when prepara_ponto =>
-        alg_enviar <= "111";
+        alg_enviar <= "1100";
         uart_trigger <= '0';
 
       when envia_ponto =>
-        alg_enviar <= "111";
+        alg_enviar <= "1100";
         uart_trigger <= '1';
 
       when others =>
-        alg_enviar <= "000";
+        alg_enviar <= "1111";
         uart_trigger <= '0';
 
     end case;
