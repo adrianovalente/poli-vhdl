@@ -117,6 +117,14 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SEGMENT_SIZE=2048
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_SAMPLE_DEPTH=2048" -section_id auto_signaltap_0
 set_global_assignment -name VHDL_FILE edge_detector.vhd
 set_global_assignment -name VHDL_FILE mod_m_divisor.vhd
+set_global_assignment -name VHDL_FILE fifo.vhd
+set_global_assignment -name VHDL_FILE flag_buf.vhd
+set_global_assignment -name VHDL_FILE mod_m_counter.vhd
+set_global_assignment -name VHDL_FILE uart.vhd
+set_global_assignment -name VHDL_FILE uart_decoder.vhd
+set_global_assignment -name VHDL_FILE uart_rx.vhd
+set_global_assignment -name VHDL_FILE uart_tx.vhd
+set_global_assignment -name VHDL_FILE custom_edge_detector.vhd
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_trigger_in[0] -to "mod_m_divisor:baud_gen_unit|max_tick" -section_id auto_signaltap_0
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[23] -to "mod_m_divisor:baud_gen_unit|max_tick" -section_id auto_signaltap_0
 set_instance_assignment -name CONNECT_TO_SLD_NODE_ENTITY_PORT acq_data_in[24] -to pwm -section_id auto_signaltap_0
