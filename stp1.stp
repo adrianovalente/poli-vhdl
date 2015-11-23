@@ -15,11 +15,11 @@
     </position_info>
     <signal_set global_temp="1" name="signal_set: 2015/11/18 10:58:33  #0">
       <clock name="clk" polarity="posedge" tap_mode="classic"/>
-      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="2048" trigger_in_enable="yes" trigger_in_node="mod_m_counter:baud_gen_unit|max_tick" trigger_in_tap_mode="classic" trigger_out_enable="no"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="2048" trigger_in_enable="yes" trigger_in_node="mod_m_divisor:baud_gen_unit|max_tick" trigger_in_tap_mode="classic" trigger_out_enable="no"/>
       <top_entity/>
       <signal_vec>
         <trigger_input_vec>
-          <wire name="mod_m_counter:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
+          <wire name="mod_m_divisor:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
         </trigger_input_vec>
         <data_input_vec>
           <wire name="counter[0]" tap_mode="classic" type="register"/>
@@ -45,7 +45,7 @@
           <wire name="direction[0]" tap_mode="classic" type="register"/>
           <wire name="direction[1]" tap_mode="classic" type="register"/>
           <wire name="entra" tap_mode="classic" type="input pin"/>
-          <wire name="mod_m_counter:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
+          <wire name="mod_m_divisor:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
           <wire name="pwm" tap_mode="classic" type="output pin"/>
           <wire name="rst" tap_mode="classic" type="input pin"/>
           <wire name="state_counter[1]" tap_mode="classic" type="register"/>
@@ -80,7 +80,7 @@
           <wire name="direction[0]" tap_mode="classic" type="register"/>
           <wire name="direction[1]" tap_mode="classic" type="register"/>
           <wire name="entra" tap_mode="classic" type="input pin"/>
-          <wire name="mod_m_counter:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
+          <wire name="mod_m_divisor:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
           <wire name="pwm" tap_mode="classic" type="output pin"/>
           <wire name="rst" tap_mode="classic" type="input pin"/>
           <wire name="state_counter[1]" tap_mode="classic" type="register"/>
@@ -132,7 +132,7 @@
             <net is_signal_inverted="no" name="state_counter[6]"/>
             <net is_signal_inverted="no" name="state_counter[7]"/>
           </bus>
-          <net is_signal_inverted="no" name="mod_m_counter:baud_gen_unit|max_tick"/>
+          <net is_signal_inverted="no" name="mod_m_divisor:baud_gen_unit|max_tick"/>
         </data_view>
         <setup_view>
           <bus is_signal_inverted="no" link="all" name="counter" order="lsb_to_msb" radix="hex" state="collapse" type="register">
@@ -173,13 +173,13 @@
             <net is_signal_inverted="no" name="state_counter[6]"/>
             <net is_signal_inverted="no" name="state_counter[7]"/>
           </bus>
-          <net is_signal_inverted="no" name="mod_m_counter:baud_gen_unit|max_tick"/>
+          <net is_signal_inverted="no" name="mod_m_divisor:baud_gen_unit|max_tick"/>
         </setup_view>
       </presentation>
       <trigger CRC="9982B839" attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2015/11/18 10:58:33  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="rising edge" trigger_out="active high" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
         <events use_custom_flow_control="no">
-          <level enabled="yes" name="condition1" type="basic">'mod_m_counter:baud_gen_unit|max_tick' == rising edge
+          <level enabled="yes" name="condition1" type="basic">'mod_m_divisor:baud_gen_unit|max_tick' == rising edge
             <power_up enabled="yes">
             </power_up>
             <op_node/>

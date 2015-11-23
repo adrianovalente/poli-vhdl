@@ -18,7 +18,7 @@ architecture bhv of pwmGenerator is
 
 begin
   
-  baud_gen_unit: entity work.mod_m_counter(arch)
+  baud_gen_unit: entity work.mod_m_divisor(arch)
       generic map(N=>1000000)
       port map(clk=>clk, max_tick=>mudar);
   

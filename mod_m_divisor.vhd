@@ -4,19 +4,19 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity mod_m_counter is
+entity mod_m_divisor is
    generic(
       N: integer := 4     -- count
-      
+
   );
    port(
       clk: in std_logic;
       max_tick: out std_logic
-     
-   );
-end mod_m_counter;
 
-architecture arch of mod_m_counter is
+   );
+end mod_m_divisor;
+
+architecture arch of mod_m_divisor is
   shared variable counter : integer range N-1 downto 0 := 0 ;
 begin
    -- register
