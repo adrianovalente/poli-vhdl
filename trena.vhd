@@ -20,7 +20,7 @@ begin
     port map(
       clk=>clk,
       rst=>'1',
-      pwm=>trigger
+      pwm=>open
     );
 
   triggerCounter: entity work.triggerCounter(bhv)
@@ -36,7 +36,7 @@ begin
     d=>counter,
     q=>distancia
   );
-  
+
   calc: entity work.calc(seila)
   port map(
     time_in=>distancia,
@@ -44,7 +44,18 @@ begin
     alg1=>alg1,
     alg2=>alg2
   );
-  
+
+  controller: entity work.controlUnit(arch)
+  port map(
+    clk=>clk,
+    echo=>echo,
+    enable=>'1',
+    trigger=>trigger,
+    enviar=>open,
+    max_value=>open,
+    angulo_out=>open
+  );
+
 echo_time <= distancia;
 
 end structural;
