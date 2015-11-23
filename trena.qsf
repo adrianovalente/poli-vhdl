@@ -54,6 +54,7 @@ set_global_assignment -name VHDL_FILE controlUnit.vhd
 set_global_assignment -name VHDL_FILE trena.vhd
 set_global_assignment -name VHDL_FILE calc.vhd
 set_global_assignment -name VHDL_FILE uartController.vhd
+set_global_assignment -name VHDL_FILE asciiConverter.vhd
 
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_location_assignment PIN_N2 -to clk

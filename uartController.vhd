@@ -67,7 +67,7 @@ begin
 
         when envia_virgula =>
           if ja_enviou = '1' then
-            current_state => prepara_ang_2;
+            current_state <= prepara_ang_2;
           end if;
 
         when prepara_ang_2 =>
@@ -87,7 +87,7 @@ begin
           end if;
 
         when prepara_ang_0 =>
-          current_state => envia_ang_0;
+          current_state <= envia_ang_0;
 
         when envia_ang_0 =>
           if ja_enviou = '1' then
@@ -187,3 +187,4 @@ begin
 
     end case;
   end process;
+end arch;
