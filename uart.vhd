@@ -13,7 +13,7 @@ entity uart is
       DVSR: integer:= 162;  -- baud rate divisor
                             -- DVSR = 50M/(16*baud rate)
       DVSR_BIT: integer:=8; -- # bits of DVSR
-      FIFO_W: integer:=1    -- # addr bits of FIFO
+      FIFO_W: integer:=5    -- # addr bits of FIFO
                             -- # words in FIFO=2^FIFO_W
    );
    port(
@@ -28,7 +28,8 @@ entity uart is
 
       trigger: out std_logic;
       echo: in std_logic;
-      pwm_motor: out std_logic
+      pwm_motor: out std_logic;
+      resetando: out std_logic
 
 
    );
@@ -56,32 +57,34 @@ architecture str_arch of uart is
    signal saida_uart: std_logic_vector(7 downto 0);
 
 begin
+	
+	resetando <= not KEY(1);
    baud_gen_unit: entity work.mod_m_counter(arch)
       generic map(M=>DVSR, N=>DVSR_BIT)
-      port map(clk=>CLK, reset=>(not KEY(0)),
+      port map(clk=>CLK, reset=>(not KEY(1)),
                q=>open, max_tick=>tick);
 
    uart_rx_unit: entity work.uart_rx(arch)
       generic map(DBIT=>DBIT, SB_TICK=>SB_TICK)
-      port map(clk=>CLK, reset=>(not KEY(0)), rx=>UART_RXD,
+      port map(clk=>CLK, reset=>(not KEY(1)), rx=>UART_RXD,
                s_tick=>tick, rx_done_tick=>rx_done_tick,
                dout=>rx_data_out, reading=>LEDG(5));
 
    fifo_rx_unit: entity work.fifo(arch)
       generic map(B=>DBIT, W=>FIFO_W)
-      port map(clk=>CLK, reset=>(not KEY(0)), rd=>NOT rx_fifo_empty,
+      port map(clk=>CLK, reset=>(not KEY(1)), rd=>NOT rx_fifo_empty,
                wr=>rx_done_tick, w_data=>rx_data_out,
                empty=>rx_fifo_empty, full=>LEDR(0), r_data=>read_data_in);
 
    fifo_tx_unit: entity work.fifo(arch)
       generic map(B=>DBIT, W=>FIFO_W)
-      port map(clk=>CLK, reset=>(not KEY(0)), rd=>tx_done_tick,
+      port map(clk=>CLK, reset=>(not KEY(1)), rd=>tx_done_tick,
                wr=>edge_detector_tx_output, w_data=>saida_uart, empty=>tx_empty,
                full=>open, r_data=>tx_fifo_out);
 
    uart_tx_unit: entity work.uart_tx(arch)
       generic map(DBIT=>DBIT, SB_TICK=>SB_TICK)
-      port map(clk=>CLK, reset=>(not KEY(0)),
+      port map(clk=>CLK, reset=>(not KEY(1)),
                tx_start=>tx_fifo_not_empty,
                s_tick=>tick, din=>tx_fifo_out,
                tx_done_tick=> tx_done_tick, tx=>UART_TXD);
