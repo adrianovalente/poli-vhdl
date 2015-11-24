@@ -45,11 +45,13 @@ architecture str_arch of uart is
    signal rx_fifo_empty: std_logic;
    signal edge_detector_tx_output: std_logic;
    signal rd, wr: std_logic;
+   signal angulo_motor: integer range 0 to 180;
+   
 
    -- RADAR --
 
    signal counter, distancia: integer range 0 to 24000;
-   signal alg0, alg1, alg2, algarismo: std_logic_vector(3 downto 0);
+   signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2: std_logic_vector(3 downto 0);
    signal enviar: std_logic;
    signal saida_uart: std_logic_vector(7 downto 0);
 
@@ -88,9 +90,13 @@ begin
 	  port map(clk=>CLK, signal_in=>wr, output=>edge_detector_tx_output);
 
 
+	trigger_gen: entity work.triggerGenerator(bhv)
+	  port map(clk=>CLK, rst=>'1', pwm=>trigger);
 
 
-   wr <= not KEY(1);
+
+
+   --wr <= not KEY(1);
    tx_fifo_not_empty <= not tx_empty;
 
    LEDG(6) <= rd;
@@ -100,7 +106,7 @@ begin
    --------------------- RADAR LOGIC -----------------------
 
    pwmGenerator: entity work.pwmGenerator(bhv)
-    port map(clk=>CLK, rst=>'1', pwm=>pwm_motor, ct=>open);
+    port map(clk=>CLK, rst=>'1', pwm=>pwm_motor, ct=>open, angulo=>angulo_motor);
 
 
     triggerCounter: entity work.triggerCounter(bhv)
@@ -124,6 +130,15 @@ begin
       alg1=>alg1,
       alg2=>alg2
     );
+    
+    
+    decimal: entity work.decimal(seila)
+    port map(
+      time_in=>angulo_motor,
+      alg0=>ang0,
+      alg1=>ang1,
+      alg2=>ang2
+    );
 
     enviar_edge_detector: entity work.custom_edge_detector(arch)
     port map(clk=>CLK, signal_in=>not echo, output=>enviar);
@@ -137,9 +152,9 @@ begin
       alg0=>alg0,
       alg1=>alg1,
       alg2=>alg2,
-      ang2=>"0001",
-      ang1=>"0110",
-      ang0=>"0010",
+      ang2=>ang2,
+      ang1=>ang1,
+      ang0=>ang0,
       alg_enviar=>algarismo
     );
 

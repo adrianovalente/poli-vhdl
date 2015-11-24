@@ -35,7 +35,7 @@ begin
 
         when espera =>
           if mandar='1'then
-            current_state <= prepara_2;
+            current_state <= prepara_ang_2;
           end if;
 
         when prepara_2 =>
@@ -59,7 +59,7 @@ begin
 
         when envia_0 =>
           if ja_enviou = '1' then
-            current_state <= prepara_virgula;
+            current_state <= prepara_ponto;
           end if;
 
         when prepara_virgula =>
@@ -67,7 +67,7 @@ begin
 
         when envia_virgula =>
           if ja_enviou = '1' then
-            current_state <= prepara_ang_2;
+            current_state <= prepara_2;
           end if;
 
         when prepara_ang_2 =>
@@ -91,7 +91,7 @@ begin
 
         when envia_ang_0 =>
           if ja_enviou = '1' then
-            current_state <= prepara_ponto;
+            current_state <= prepara_virgula;
           end if;
 
         when prepara_ponto =>
