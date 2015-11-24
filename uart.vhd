@@ -26,6 +26,8 @@ entity uart is
 
       ------- RADAR -------
 
+
+	  ligado: in std_logic;
       trigger: out std_logic;
       echo: in std_logic;
       pwm_motor: out std_logic;
@@ -53,13 +55,16 @@ architecture str_arch of uart is
 
    signal counter, distancia: integer range 0 to 24000;
    signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2: std_logic_vector(3 downto 0);
-   signal enviar: std_logic;
+   signal enviar, trigger_signal, pwm_motor_signal: std_logic;
    signal saida_uart: std_logic_vector(7 downto 0);
 
 begin
 	
 	resetando <= not KEY(1);
-   baud_gen_unit: entity work.mod_m_counter(arch)
+	pwm_motor <= pwm_motor_signal and ligado;
+	trigger <= trigger_signal and ligado;
+	
+    baud_gen_unit: entity work.mod_m_counter(arch)
       generic map(M=>DVSR, N=>DVSR_BIT)
       port map(clk=>CLK, reset=>(not KEY(1)),
                q=>open, max_tick=>tick);
@@ -94,7 +99,7 @@ begin
 
 
 	trigger_gen: entity work.triggerGenerator(bhv)
-	  port map(clk=>CLK, rst=>'1', pwm=>trigger);
+	  port map(clk=>CLK, rst=>'1', pwm=>trigger_signal);
 
 
 
@@ -109,7 +114,7 @@ begin
    --------------------- RADAR LOGIC -----------------------
 
    pwmGenerator: entity work.pwmGenerator(bhv)
-    port map(clk=>CLK, rst=>'1', pwm=>pwm_motor, ct=>open, angulo=>angulo_motor);
+    port map(clk=>CLK and ligado, rst=>'1', pwm=>pwm_motor_signal, ct=>open, angulo=>angulo_motor);
 
 
     triggerCounter: entity work.triggerCounter(bhv)
