@@ -6,24 +6,33 @@
     <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
     <position_info>
       <single attribute="active tab" value="1"/>
-      <single attribute="data horizontal scroll position" value="1011"/>
+      <single attribute="data horizontal scroll position" value="0"/>
       <single attribute="data vertical scroll position" value="0"/>
-      <single attribute="zoom level denominator" value="1"/>
-      <single attribute="zoom level numerator" value="2048"/>
-      <single attribute="zoom offset denominator" value="1"/>
-      <single attribute="zoom offset numerator" value="4"/>
-      <single attribute="setup vertical scroll position" value="0"/>
       <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="0"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="122880"/>
     </position_info>
-    <signal_set global_temp="1" name="signal_set: 2015/11/24 13:30:21  #0">
-      <clock name="clk" polarity="posedge" tap_mode="classic"/>
-      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="8192" trigger_in_enable="yes" trigger_in_node="trigger" trigger_in_tap_mode="classic" trigger_out_enable="no"/>
+    <signal_set global_temp="1" name="signal_set: 2015/11/24 14:38:33  #0">
+      <clock name="CLK" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="8192" trigger_in_enable="yes" trigger_in_node="uartController:uartController|mandar" trigger_in_tap_mode="classic" trigger_out_enable="no"/>
       <top_entity/>
       <signal_vec>
         <trigger_input_vec>
-          <wire name="trigger" tap_mode="classic" type="output pin"/>
+          <wire name="uartController:uartController|mandar" tap_mode="classic" type="combinatorial"/>
         </trigger_input_vec>
         <data_input_vec>
+          <wire name="UART_TXD" tap_mode="classic" type="output pin"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[7]" tap_mode="classic" type="combinatorial"/>
           <wire name="mod_m_divisor:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
           <wire name="trigger" tap_mode="classic" type="output pin"/>
           <wire name="triggerCounter:triggerCounter|echo" tap_mode="classic" type="combinatorial"/>
@@ -46,17 +55,18 @@
           <wire name="uartController:uartController|current_state.prepara_virgula" tap_mode="classic" type="state machine"/>
           <wire name="uartController:uartController|ja_enviou" tap_mode="classic" type="combinatorial"/>
           <wire name="uartController:uartController|mandar" tap_mode="classic" type="combinatorial"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.data" tap_mode="classic" type="state machine"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.idle" tap_mode="classic" type="state machine"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.start" tap_mode="classic" type="state machine"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.stop" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.data" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.idle" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.start" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.stop" tap_mode="classic" type="state machine"/>
           <wire name="uart_tx:uart_tx_unit|tx_done_tick" tap_mode="classic" type="combinatorial"/>
         </data_input_vec>
         <storage_qualifier_input_vec>
+          <wire name="UART_TXD" tap_mode="classic" type="output pin"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="asciiConverter:asciiConverter|ascii_out[7]" tap_mode="classic" type="combinatorial"/>
           <wire name="mod_m_divisor:baud_gen_unit|max_tick" tap_mode="classic" type="combinatorial"/>
           <wire name="trigger" tap_mode="classic" type="output pin"/>
           <wire name="triggerCounter:triggerCounter|echo" tap_mode="classic" type="combinatorial"/>
@@ -79,14 +89,6 @@
           <wire name="uartController:uartController|current_state.prepara_virgula" tap_mode="classic" type="state machine"/>
           <wire name="uartController:uartController|ja_enviou" tap_mode="classic" type="combinatorial"/>
           <wire name="uartController:uartController|mandar" tap_mode="classic" type="combinatorial"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.data" tap_mode="classic" type="state machine"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.idle" tap_mode="classic" type="state machine"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.start" tap_mode="classic" type="state machine"/>
-          <wire name="uart_rx:uart_rx_unit|state_reg.stop" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.data" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.idle" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.start" tap_mode="classic" type="state machine"/>
-          <wire name="uart_tx:uart_tx_unit|state_reg.stop" tap_mode="classic" type="state machine"/>
           <wire name="uart_tx:uart_tx_unit|tx_done_tick" tap_mode="classic" type="combinatorial"/>
         </storage_qualifier_input_vec>
       </signal_vec>
@@ -113,22 +115,21 @@
             <net is_signal_inverted="no" name="uartController:uartController|current_state.prepara_ponto"/>
             <net is_signal_inverted="no" name="uartController:uartController|current_state.prepara_virgula"/>
           </bus>
-          <bus is_signal_inverted="no" link="all" mnemonics="state_reg_table" name="uart_rx:uart_rx_unit|state_reg" order="lsb_to_msb" state="collapse" type="state machine">
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.data"/>
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.idle"/>
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.start"/>
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.stop"/>
-          </bus>
-          <bus is_signal_inverted="no" link="all" mnemonics="state_reg_table (1)" name="uart_tx:uart_tx_unit|state_reg" order="lsb_to_msb" state="collapse" type="state machine">
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.data"/>
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.idle"/>
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.start"/>
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.stop"/>
-          </bus>
           <net is_signal_inverted="no" name="uartController:uartController|mandar"/>
           <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|tx_done_tick"/>
           <net is_signal_inverted="no" name="uartController:uartController|ja_enviou"/>
           <net is_signal_inverted="no" name="triggerCounter:triggerCounter|echo"/>
+          <net is_signal_inverted="no" name="UART_TXD"/>
+          <bus is_signal_inverted="no" link="all" name="asciiConverter:asciiConverter|ascii_out" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[0]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[1]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[2]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[3]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[4]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[5]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[6]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[7]"/>
+          </bus>
         </data_view>
         <setup_view>
           <net is_signal_inverted="no" name="mod_m_divisor:baud_gen_unit|max_tick"/>
@@ -152,36 +153,35 @@
             <net is_signal_inverted="no" name="uartController:uartController|current_state.prepara_ponto"/>
             <net is_signal_inverted="no" name="uartController:uartController|current_state.prepara_virgula"/>
           </bus>
-          <bus is_signal_inverted="no" link="all" mnemonics="state_reg_table" name="uart_rx:uart_rx_unit|state_reg" order="lsb_to_msb" state="collapse" type="state machine">
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.data"/>
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.idle"/>
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.start"/>
-            <net is_signal_inverted="no" name="uart_rx:uart_rx_unit|state_reg.stop"/>
-          </bus>
-          <bus is_signal_inverted="no" link="all" mnemonics="state_reg_table (1)" name="uart_tx:uart_tx_unit|state_reg" order="lsb_to_msb" state="collapse" type="state machine">
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.data"/>
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.idle"/>
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.start"/>
-            <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|state_reg.stop"/>
-          </bus>
           <net is_signal_inverted="no" name="uartController:uartController|mandar"/>
           <net is_signal_inverted="no" name="uart_tx:uart_tx_unit|tx_done_tick"/>
           <net is_signal_inverted="no" name="uartController:uartController|ja_enviou"/>
           <net is_signal_inverted="no" name="triggerCounter:triggerCounter|echo"/>
+          <net is_signal_inverted="no" name="UART_TXD"/>
+          <bus is_signal_inverted="no" link="all" name="asciiConverter:asciiConverter|ascii_out" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[0]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[1]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[2]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[3]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[4]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[5]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[6]"/>
+            <net is_signal_inverted="no" name="asciiConverter:asciiConverter|ascii_out[7]"/>
+          </bus>
         </setup_view>
       </presentation>
-      <trigger attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2015/11/24 13:30:21  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="rising edge" trigger_out="active high" trigger_type="circular">
+      <trigger attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2015/11/24 14:38:33  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="rising edge" trigger_out="active high" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
         <events use_custom_flow_control="no">
-          <level enabled="yes" name="condition1" type="basic">'trigger' == rising edge
+          <level enabled="yes" name="condition1" type="basic">'uartController:uartController|mandar' == rising edge
             <power_up enabled="yes">
             </power_up>
             <op_node/>
           </level>
         </events>
         <storage_qualifier_events>
-          <transitional>0000000000000000000000000000000
-            <pwr_up_transitional>0000000000000000000000000000000
+          <transitional>00000000000000000000000000000000
+            <pwr_up_transitional>00000000000000000000000000000000
             </pwr_up_transitional>
           </transitional>
           <storage_qualifier_level type="basic">
