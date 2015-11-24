@@ -9,7 +9,7 @@ entity triggerGenerator is
 end triggerGenerator;
 
 architecture bhv of triggerGenerator is
-  signal counter : integer range 0 to 50000000 := 0;
+  signal counter : integer range 0 to 625000 := 0;
   shared variable max_cycles_value : integer range 0 to 50000000 := 500;
 
 begin

@@ -3,9 +3,10 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity pwmGenerator is
   port (
-    clk, rst, entra: in std_logic;
+    clk, rst: in std_logic;
     pwm: out std_logic;
-    ct: out integer range 0 to 1000000
+    ct: out integer range 0 to 1000000;
+    angulo: out integer range 0 to 180
   );
 end pwmGenerator;
 
@@ -18,9 +19,11 @@ architecture bhv of pwmGenerator is
 
 begin
   
-  baud_gen_unit: entity work.mod_m_counter(arch)
+  baud_gen_unit: entity work.mod_m_divisor(arch)
       generic map(N=>1000000)
       port map(clk=>clk, max_tick=>mudar);
+  
+  angulo <= state_counter;
   
   -- counter update
   process(clk, rst)
