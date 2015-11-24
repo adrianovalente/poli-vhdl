@@ -31,81 +31,87 @@ begin
   process(mandar, clk)
   begin
     if clk'event and clk='1'then
-      case current_state is
+      
+      if mandar='1' then
+		current_state <= prepara_ang_2;
+	  else
+      
+		  case current_state is
 
-        when espera =>
-          if mandar='1'then
-            current_state <= prepara_ang_2;
-          end if;
+			when espera =>
+			  if mandar='1'then
+				current_state <= prepara_ang_2;
+			  end if;
 
-        when prepara_2 =>
-          current_state <= envia_2;
+			when prepara_2 =>
+			  current_state <= envia_2;
 
-        when envia_2 =>
-          if ja_enviou = '1' then
-            current_state <= prepara_1;
-          end if;
+			when envia_2 =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_1;
+			  end if;
 
-        when prepara_1 =>
-          current_state <= envia_1;
+			when prepara_1 =>
+			  current_state <= envia_1;
 
-        when envia_1 =>
-          if ja_enviou = '1' then
-            current_state <= prepara_0;
-          end if;
+			when envia_1 =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_0;
+			  end if;
 
-        when prepara_0 =>
-          current_state <= envia_0;
+			when prepara_0 =>
+			  current_state <= envia_0;
 
-        when envia_0 =>
-          if ja_enviou = '1' then
-            current_state <= prepara_ponto;
-          end if;
+			when envia_0 =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_ponto;
+			  end if;
 
-        when prepara_virgula =>
-          current_state <= envia_virgula;
+			when prepara_virgula =>
+			  current_state <= envia_virgula;
 
-        when envia_virgula =>
-          if ja_enviou = '1' then
-            current_state <= prepara_2;
-          end if;
+			when envia_virgula =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_2;
+			  end if;
 
-        when prepara_ang_2 =>
-          current_state <= envia_ang_2;
+			when prepara_ang_2 =>
+			  current_state <= envia_ang_2;
 
-        when envia_ang_2 =>
-          if ja_enviou = '1' then
-            current_state <= prepara_ang_1;
-          end if;
+			when envia_ang_2 =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_ang_1;
+			  end if;
 
-        when prepara_ang_1 =>
-          current_state <= envia_ang_1;
+			when prepara_ang_1 =>
+			  current_state <= envia_ang_1;
 
-        when envia_ang_1 =>
-          if ja_enviou = '1' then
-            current_state <= prepara_ang_0;
-          end if;
+			when envia_ang_1 =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_ang_0;
+			  end if;
 
-        when prepara_ang_0 =>
-          current_state <= envia_ang_0;
+			when prepara_ang_0 =>
+			  current_state <= envia_ang_0;
 
-        when envia_ang_0 =>
-          if ja_enviou = '1' then
-            current_state <= prepara_virgula;
-          end if;
+			when envia_ang_0 =>
+			  if ja_enviou = '1' then
+				current_state <= prepara_virgula;
+			  end if;
 
-        when prepara_ponto =>
-          current_state <= envia_ponto;
+			when prepara_ponto =>
+			  current_state <= envia_ponto;
 
-        when envia_ponto =>
-          if ja_enviou = '1' then
-            current_state <= espera;
-          end if;
+			when envia_ponto =>
+			  if ja_enviou = '1' then
+				current_state <= espera;
+			  end if;
 
-        when others =>
-          current_state <= espera;
+			when others =>
+			  current_state <= espera;
 
-      end case;
+		  end case;
+		 end if;
     end if;
   end process;
 
