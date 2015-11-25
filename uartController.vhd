@@ -5,7 +5,7 @@ entity uartController is
   port (
     clk, ja_enviou, mandar: in std_logic;
     uart_trigger: out std_logic;
-    alg0, alg1, alg2, ang2, ang1, ang0, color: in std_logic_vector(3 downto 0);
+    alg0, alg1, alg2, ang2, ang1, ang0, color, alerta: in std_logic_vector(3 downto 0);
     alg_enviar: out std_logic_vector(3 downto 0)
   );
 end uartController;
@@ -22,7 +22,9 @@ architecture arch of uartController is
                 prepara_ang_0, envia_ang_0,
                 prepara_segunda_virgula, envia_segunda_virgula,
                 prepara_cor, envia_cor,
-                prepara_ponto, envia_ponto
+                prepara_ponto, envia_ponto,
+                prepara_terceira_virgula, envia_terceira_virgula,
+                prepara_alerta, envia_alerta
                 );
 
   signal current_state: state := espera;
@@ -122,6 +124,22 @@ begin
 
       when envia_cor =>
         if ja_enviou='1'then
+          current_state <= prepara_terceira_virgula;
+        end if;
+
+      when prepara_terceira_virgula =>
+        current_state <= envia_terceira_virgula;
+
+      when envia_terceira_virgula =>
+        if ja_enviou ='1'then
+          current_state <= prepara_alerta;
+        end if;
+
+      when prepara_alerta =>
+        current_state <= envia_alerta;
+
+      when envia_alerta =>
+        if ja_enviou='1'then
           current_state <= prepara_ponto;
         end if;
 
@@ -219,7 +237,23 @@ begin
 
       when envia_cor =>
         alg_enviar <= color;
-        uart_trigger <= '1';  
+        uart_trigger <= '1';
+
+      when prepara_terceira_virgula =>
+        alg_enviar <= "1101";
+        uart_trigger <= '0';
+
+      when envia_terceira_virgula =>
+        alg_enviar <= "1101";
+        uart_trigger <= '1';
+
+      when prepara_alerta =>
+        alg_enviar <= alerta;
+        uart_trigger <= '0';
+
+      when envia_alerta =>
+        alg_enviar <= alerta;
+        uart_trigger <= '1';
 
       when others =>
         alg_enviar <= "1111";
