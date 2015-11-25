@@ -5,7 +5,7 @@ entity uartController is
   port (
     clk, ja_enviou, mandar: in std_logic;
     uart_trigger: out std_logic;
-    alg0, alg1, alg2, ang2, ang1, ang0: in std_logic_vector(3 downto 0);
+    alg0, alg1, alg2, ang2, ang1, ang0, color: in std_logic_vector(3 downto 0);
     alg_enviar: out std_logic_vector(3 downto 0)
   );
 end uartController;
@@ -20,6 +20,8 @@ architecture arch of uartController is
                 prepara_ang_2, envia_ang_2,
                 prepara_ang_1, envia_ang_1,
                 prepara_ang_0, envia_ang_0,
+                prepara_segunda_virgula, envia_segunda_virgula,
+                prepara_cor, envia_cor,
                 prepara_ponto, envia_ponto
                 );
 
@@ -31,11 +33,11 @@ begin
   process(mandar, clk)
   begin
     if clk'event and clk='1'then
-      
+
       if mandar='1' then
 		current_state <= prepara_ang_2;
 	  else
-      
+
 		  case current_state is
 
 			when espera =>
@@ -64,7 +66,7 @@ begin
 
 			when envia_0 =>
 			  if ja_enviou = '1' then
-				current_state <= prepara_ponto;
+				current_state <= prepara_segunda_virgula;
 			  end if;
 
 			when prepara_virgula =>
@@ -106,6 +108,22 @@ begin
 			  if ja_enviou = '1' then
 				current_state <= espera;
 			  end if;
+
+      when prepara_segunda_virgula =>
+        current_state <= envia_segunda_virgula;
+
+      when envia_segunda_virgula =>
+        if ja_enviou = '1'then
+        current_state <= prepara_cor;
+        end if;
+
+      when prepara_cor =>
+        current_state <= envia_cor;
+
+      when envia_cor =>
+        if ja_enviou='1'then
+          current_state <= prepara_ponto;
+        end if;
 
 			when others =>
 			  current_state <= espera;
@@ -186,6 +204,22 @@ begin
       when envia_ponto =>
         alg_enviar <= "1100";
         uart_trigger <= '1';
+
+      when prepara_segunda_virgula =>
+        alg_enviar <= "1101";
+        uart_trigger <= '0';
+
+      when envia_segunda_virgula =>
+        alg_enviar <= "1101";
+        uart_trigger <= '1';
+
+      when prepara_cor =>
+        alg_enviar <= color;
+        uart_trigger <= '0';
+
+      when envia_cor =>
+        alg_enviar <= color;
+        uart_trigger <= '1';  
 
       when others =>
         alg_enviar <= "1111";

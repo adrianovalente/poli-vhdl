@@ -6,7 +6,7 @@ use ieee.numeric_std.all;
 entity calc is
   port(
     time_in: in integer range 0 to 24000;
-    alg0, alg1, alg2: out std_logic_vector(3 downto 0)
+    alg0, alg1, alg2, color: out std_logic_vector(3 downto 0)
   );
 end calc;
 
@@ -14,6 +14,15 @@ architecture seila of calc is
   signal dist: integer range 0 to 512;
   signal first, second: integer range 0 to 512;
 begin
+  if time_in<20 then
+    color <= "1111";
+  else
+    if time_in<40 then
+      color <= "1011";
+    else
+      color <= "1010";
+    end if;
+  end if;
   dist <= time_in/58;
   alg0 <= std_logic_vector(to_unsigned(dist mod 10, alg0'length));
   first <= dist/10;
