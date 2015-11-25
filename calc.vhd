@@ -28,16 +28,24 @@ begin
     begin
       if dist<20 then
         color <= "1111";
-        alerta <= '1';
       else
         if dist<40 then
           color <= "1011";
-          alerta <= '0';
         else
           color <= "1010";
-          alerta <= '0';
         end if;
       end if;
     end process;
+    
+  process(dist)
+  begin
+	alerta <= '0';
+	if dist>2 and dist<20 then
+		alerta<='1';
+	else
+		alerta<='0';
+	end if;
+  end process;
+
 
 end seila;

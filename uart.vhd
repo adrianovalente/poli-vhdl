@@ -57,7 +57,8 @@ architecture str_arch of uart is
    signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2, color_signal, alerta_alg: std_logic_vector(3 downto 0);
    signal enviar, trigger_signal, pwm_motor_signal: std_logic;
    signal saida_uart: std_logic_vector(7 downto 0);
-   signal motor_zero, alerta: std_logic;
+   signal motor_zero, alerta, mudando_angulo: std_logic;
+   signal dist_medida: integer range 0 to 512;
 
 begin
 
@@ -139,7 +140,8 @@ begin
       alg1=>alg1,
       alg2=>alg2,
       color=>color_signal,
-      alerta=>alerta
+      alerta=>alerta,
+      distancia=>dist_medida
     );
 
 
@@ -155,8 +157,11 @@ begin
     port map(clk=>CLK, signal_in=>not echo, output=>enviar);
 
     reg_alerta: entity work.alertaRegister(arch)
-    port map(motor_zero, alerta, CLK, alerta_alg);
-
+    port map(rst=>motor_zero,
+			 alerta=>alerta,
+			 clk=>CLK,
+			 alerta_out=>alerta_alg);
+			 
     uartController: entity work.uartController(arch)
     port map(
       clk=>CLK,

@@ -7,7 +7,7 @@ entity pwmGenerator is
     pwm: out std_logic;
     ct: out integer range 0 to 1000000;
     angulo: out integer range 0 to 180;
-    resetando_angulo: out std_logic
+    resetando_angulo, mudando_angulo: out std_logic
   );
 end pwmGenerator;
 
@@ -62,13 +62,15 @@ begin
 
   end process;
 
-  process(all)
+  process(mudar)
   begin
-    if state_counter=0 then
-      resetando_angulo <= '1';
-    else
-      resetando_angulo <= '0';
-    end if;
+    if mudar'event and mudar='1' then
+		if state_counter=0 then
+		  resetando_angulo <= '1';
+		else
+		  resetando_angulo <= '0';
+		end if;
+	end if;
   end process;
 
 end bhv;
