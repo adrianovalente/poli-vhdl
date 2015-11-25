@@ -54,9 +54,10 @@ architecture str_arch of uart is
    -- RADAR --
 
    signal counter, distancia: integer range 0 to 24000;
-   signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2, color_signal: std_logic_vector(3 downto 0);
+   signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2, color_signal, alerta_alg: std_logic_vector(3 downto 0);
    signal enviar, trigger_signal, pwm_motor_signal: std_logic;
    signal saida_uart: std_logic_vector(7 downto 0);
+   signal motor_zero, alerta: std_logic;
 
 begin
 
@@ -114,7 +115,7 @@ begin
    --------------------- RADAR LOGIC -----------------------
 
    pwmGenerator: entity work.pwmGenerator(bhv)
-    port map(clk=>CLK and ligado, rst=>'1', pwm=>pwm_motor_signal, ct=>open, angulo=>angulo_motor);
+    port map(clk=>CLK and ligado, rst=>'1', pwm=>pwm_motor_signal, ct=>open, angulo=>angulo_motor, resetando_angulo=>motor_zero);
 
 
     triggerCounter: entity work.triggerCounter(bhv)
@@ -137,7 +138,8 @@ begin
       alg0=>alg0,
       alg1=>alg1,
       alg2=>alg2,
-      color=>color_signal
+      color=>color_signal,
+      alerta=>alerta
     );
 
 
@@ -152,6 +154,9 @@ begin
     enviar_edge_detector: entity work.custom_edge_detector(arch)
     port map(clk=>CLK, signal_in=>not echo, output=>enviar);
 
+    reg_alerta: entity work.alertaRegister(arch)
+    port map(motor_zero, alert, CLK, alerta_alg);
+
     uartController: entity work.uartController(arch)
     port map(
       clk=>CLK,
@@ -164,6 +169,7 @@ begin
       ang2=>ang2,
       ang1=>ang1,
       ang0=>ang0,
+      alerta=>alerta_alg,
       alg_enviar=>algarismo,
       color=>color_signal
     );
