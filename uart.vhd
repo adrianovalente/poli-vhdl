@@ -49,21 +49,21 @@ architecture str_arch of uart is
    signal edge_detector_tx_output: std_logic;
    signal rd, wr: std_logic;
    signal angulo_motor: integer range 0 to 180;
-   
+
 
    -- RADAR --
 
    signal counter, distancia: integer range 0 to 24000;
-   signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2: std_logic_vector(3 downto 0);
+   signal alg0, alg1, alg2, algarismo, ang0, ang1, ang2, color_signal: std_logic_vector(3 downto 0);
    signal enviar, trigger_signal, pwm_motor_signal: std_logic;
    signal saida_uart: std_logic_vector(7 downto 0);
 
 begin
-	
+
 	resetando <= not KEY(1);
 	pwm_motor <= pwm_motor_signal and ligado;
 	trigger <= trigger_signal and ligado;
-	
+
     baud_gen_unit: entity work.mod_m_counter(arch)
       generic map(M=>DVSR, N=>DVSR_BIT)
       port map(clk=>CLK, reset=>(not KEY(1)),
@@ -136,10 +136,11 @@ begin
       time_in=>distancia,
       alg0=>alg0,
       alg1=>alg1,
-      alg2=>alg2
+      alg2=>alg2,
+      color=>color_signal
     );
-    
-    
+
+
     decimal: entity work.decimal(seila)
     port map(
       time_in=>angulo_motor,
@@ -163,7 +164,8 @@ begin
       ang2=>ang2,
       ang1=>ang1,
       ang0=>ang0,
-      alg_enviar=>algarismo
+      alg_enviar=>algarismo,
+      color=>color_signal
     );
 
     asciiConverter: entity work.asciiConverter(arch)

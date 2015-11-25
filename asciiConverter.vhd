@@ -45,11 +45,20 @@ begin
       when "1001" =>
         ascii_out <= "00111001";
 
+      when "1010" =>
+        ascii_out <= "01000111"; -- GREEN
+
+      when "1011" =>
+        ascii_out <= "01011001"; -- YELLOW
+
+      when "1111" =>
+        ascii_out <= "01010010"; -- RED
+
       when "1101" =>
-        ascii_out <= "00101100";
+        ascii_out <= "00101100"; -- VIRGULA
 
       when "1100" =>
-        ascii_out <= "00101110";
+        ascii_out <= "00101110"; -- PONTO FINAL
 
       when others =>
         ascii_out <= "00111111";
