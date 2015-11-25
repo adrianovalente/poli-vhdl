@@ -46,7 +46,7 @@ begin
         ascii_out <= "00111001";
 
       when "1010" =>
-        ascii_out <= "01001111"; -- GREEN
+        ascii_out <= "01000111"; -- GREEN
 
       when "1011" =>
         ascii_out <= "01011001"; -- YELLOW
