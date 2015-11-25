@@ -6,7 +6,8 @@ entity pwmGenerator is
     clk, rst: in std_logic;
     pwm: out std_logic;
     ct: out integer range 0 to 1000000;
-    angulo: out integer range 0 to 180
+    angulo: out integer range 0 to 180;
+    resetando_angulo: out std_logic
   );
 end pwmGenerator;
 
@@ -14,17 +15,17 @@ architecture bhv of pwmGenerator is
   shared variable counter : integer range 0 to 1000000 := 0;
   shared variable max_cycles_value : integer range 0 to 120000 := 30000;
   shared variable state_counter : integer range 0 to 180 := 0;
-  shared variable direction : integer range -1 to 1 := 1; 
+  shared variable direction : integer range -1 to 1 := 1;
   signal mudar: std_logic;
 
 begin
-  
+
   baud_gen_unit: entity work.mod_m_divisor(arch)
       generic map(N=>1000000)
       port map(clk=>clk, max_tick=>mudar);
-  
+
   angulo <= state_counter;
-  
+
   -- counter update
   process(clk, rst)
   begin
@@ -36,13 +37,13 @@ begin
       end if;
       ct <= counter;
     end if;
-    
+
     if (counter > max_cycles_value) then
       pwm <= '0';
     else
       pwm  <= '1';
     end if;
-    
+
   end process;
 
   -- reference update
@@ -56,7 +57,17 @@ begin
             direction := 1;
 	  end if;
 	  state_counter := state_counter + direction;
-    
+
+    end if;
+
+  end process;
+
+  process(state_counter)
+  begin
+    if state_counter=0 then
+      resetando_angulo <= '1';
+    else
+      resetando_angulo <= '0';
     end if;
   end process;
 
