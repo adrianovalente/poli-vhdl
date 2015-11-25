@@ -7,7 +7,8 @@ entity calc is
   port(
     time_in: in integer range 0 to 24000;
     alg0, alg1, alg2, color: out std_logic_vector(3 downto 0);
-    distancia: out integer range 0 to 512
+    distancia: out integer range 0 to 512;
+    alerta: out std_logic
   );
 end calc;
 
@@ -35,5 +36,16 @@ begin
         end if;
       end if;
     end process;
+    
+  process(dist)
+  begin
+	alerta <= '0';
+	if dist>2 and dist<20 then
+		alerta<='1';
+	else
+		alerta<='0';
+	end if;
+  end process;
+
 
 end seila;
