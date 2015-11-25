@@ -155,7 +155,7 @@ begin
     port map(clk=>CLK, signal_in=>not echo, output=>enviar);
 
     reg_alerta: entity work.alertaRegister(arch)
-    port map(motor_zero, alert, CLK, alerta_alg);
+    port map(motor_zero, alerta, CLK, alerta_alg);
 
     uartController: entity work.uartController(arch)
     port map(

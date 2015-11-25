@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.all;
 entity alertaRegister is
   port (
     rst, alerta, clk: in std_logic;
-    alerta_out: in std_logic_vector(3 downto 0)
+    alerta_out: out std_logic_vector(3 downto 0)
   );
 end alertaRegister;
 

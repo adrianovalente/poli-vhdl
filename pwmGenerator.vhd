@@ -62,7 +62,7 @@ begin
 
   end process;
 
-  process(state_counter)
+  process(all)
   begin
     if state_counter=0 then
       resetando_angulo <= '1';
